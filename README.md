@@ -45,6 +45,11 @@ git push -u origin main
 
 ## 🎨 Features
 - **Responsive Layout:** Works beautifully on mobile, tablet, and desktop screens.
+- **ScrollSpy Highlighting:** Dynamically highlights the current section in the navigation menu as you scroll.
+- **Improved Accessibility (a11y):** Full keyboard support (Enter/Space triggers) and standard ARIA markup (`aria-expanded`, `aria-controls`) for the mobile menu.
+- **Date Restriction Validation:** Reservation date input dynamically blocks past dates, ensuring only current or future bookings are allowed.
+- **Dynamic Copyright Year:** Automatically renders the current calendar year in the footer.
+- **Clean Stylesheet Architecture:** Extracted inline styling into clean, maintainable CSS classes.
 - **Glassmorphism:** A modern UI trend used in the reservation form and navbar.
 - **Dark Theme:** High contrast, elegant dark mode for a premium "midnight dining" feel.
 - **Social Sharing:** Optimized with Open Graph and Twitter meta tags for professional social media links.
