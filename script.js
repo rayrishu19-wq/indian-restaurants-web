@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initReservationForm();
     initBackToTop();
+    initCopyrightYear();
 });
 
 /**
@@ -102,6 +103,16 @@ function initBackToTop() {
             behavior: 'smooth'
         });
     });
+}
+
+/**
+ * Dynamically Update Copyright Year
+ */
+function initCopyrightYear() {
+    const yearEl = document.getElementById('currentYear');
+    if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+    }
 }
 
 // End of main application logic
