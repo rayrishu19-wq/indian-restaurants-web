@@ -109,6 +109,13 @@ h1, h2, h3, .logo {
     color: var(--primary-color);
 }
 
+.nav-links a[aria-current="page"] {
+    color: var(--primary-color);
+    font-weight: 500;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 4px;
+}
+
 .nav-cta {
     background: var(--primary-color) !important;
     color: var(--bg-color) !important;

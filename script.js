@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initReservationForm();
     initBackToTop();
     initCopyrightYear();
+    initScrollSpy();
 });
 
 /**
@@ -138,6 +139,41 @@ function initCopyrightYear() {
     if (yearEl) {
         yearEl.textContent = new Date().getFullYear();
     }
+}
+
+/**
+ * ScrollSpy: Highlight active section in navbar
+ */
+function initScrollSpy() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '-30% 0px -70% 0px',
+        threshold: 0
+    };
+
+    const spyObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                navLinks.forEach(link => {
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.setAttribute('aria-current', 'page');
+                    } else {
+                        link.removeAttribute('aria-current');
+                    }
+                });
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        if (document.querySelector(`.nav-links a[href="#${section.id}"]`)) {
+            spyObserver.observe(section);
+        }
+    });
 }
 
 // End of main application logic
