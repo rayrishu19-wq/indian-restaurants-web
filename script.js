@@ -34,17 +34,33 @@ function initMobileMenu() {
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
 
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
+    if (!hamburger || !navLinks) return;
+
+    const toggleMenu = () => {
+        const isActive = hamburger.classList.toggle('active');
         navLinks.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+    };
+
+    const closeMenu = () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+    };
+
+    hamburger.addEventListener('click', toggleMenu);
+
+    // Support keyboard triggers (Enter / Space) for hamburger menu
+    hamburger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleMenu();
+        }
     });
 
     // Close menu when a link is clicked
     document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
-        });
+        link.addEventListener('click', closeMenu);
     });
 }
 
