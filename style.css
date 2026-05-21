@@ -312,6 +312,15 @@ h1, h2, h3, .logo {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
+.menu-card.special {
+    border: 2px solid #ffba08;
+}
+
+.menu-card.special .menu-header h3,
+.menu-card.special .price {
+    color: #ffba08;
+}
+
 .menu-header {
     display: flex;
     justify-content: space-between;
