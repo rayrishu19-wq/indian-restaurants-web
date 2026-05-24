@@ -1,3 +1,4 @@
+// Interactive script modules for navigation, scrollspy, and booking validation
 // Enable strict mode for better error catching
 'use strict';
 
