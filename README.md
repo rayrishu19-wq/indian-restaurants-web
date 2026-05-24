@@ -75,3 +75,7 @@ For the best experience on mobile, ensure you view the site in portrait mode.
 - [x] Smooth scrolling dynamic navigation.
 - [ ] Adding dessert card modules.
 - [ ] Dynamic table booking backend simulation.
+
+
+## 👥 Authors & Contributors
+- **Rishu Ray** - *Lead Developer* - [rayrishu19-wq](https://github.com/rayrishu19-wq)
