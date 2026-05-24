@@ -68,3 +68,10 @@ No compilation step `npm install` is needed! Just open the `index.html` file in 
 For the best experience on mobile, ensure you view the site in portrait mode.
 
 
+
+
+## 🗺️ Project Roadmap
+- [x] Responsive layout optimization.
+- [x] Smooth scrolling dynamic navigation.
+- [ ] Adding dessert card modules.
+- [ ] Dynamic table booking backend simulation.
