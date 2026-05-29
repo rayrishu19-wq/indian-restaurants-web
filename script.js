@@ -9,6 +9,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     initNavbar();
     initMobileMenu();
+    initMenuFilters();
     initReservationForm();
     initBackToTop();
     initCopyrightYear();
@@ -179,8 +180,60 @@ function initScrollSpy() {
 
 // End of main application logic
 
+/**
+ * Menu Category Filtering Logic
+ */
+function initMenuFilters() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const menuCards = document.querySelectorAll('.menu-card');
 
-// Future utility functions placeholder
+    if (!filterBtns.length || !menuCards.length) return;
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filterValue = btn.getAttribute('data-filter');
+
+            // Update active state for buttons
+            filterBtns.forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-selected', 'false');
+            });
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+
+            // Filter menu items
+            menuCards.forEach(card => {
+                const category = card.getAttribute('data-category');
+
+                if (filterValue === 'all' || category === filterValue) {
+                    card.classList.remove('hidden');
+                    // Reset animation state
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+    });
+
+    // Handle Beverages navigation link redirecting to Menu with beverages filter
+    const beveragesNavLink = document.querySelector('a[href="#beverages"]');
+    if (beveragesNavLink) {
+        beveragesNavLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            const menuSection = document.getElementById('menu');
+            if (menuSection) {
+                menuSection.scrollIntoView({ behavior: 'smooth' });
+                // Trigger the click event on the beverages filter button
+                const beveragesFilterBtn = document.querySelector('.filter-btn[data-filter="beverages"]');
+                if (beveragesFilterBtn) {
+                    beveragesFilterBtn.click();
+                }
+            }
+        });
+    }
+}
 
 
 

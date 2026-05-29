@@ -84,109 +84,113 @@
     <section id="menu">
         <div class="container">
             <h2 class="section-title">Signature Selections</h2>
+            
+            <!-- Menu Category Filters -->
+            <div class="menu-filters" role="tablist" aria-label="Menu categories">
+                <button class="filter-btn active" role="tab" aria-selected="true" data-filter="all">All Selections</button>
+                <button class="filter-btn" role="tab" aria-selected="false" data-filter="mains">Main Course</button>
+                <button class="filter-btn" role="tab" aria-selected="false" data-filter="desserts">Exquisite Desserts</button>
+                <button class="filter-btn" role="tab" aria-selected="false" data-filter="beverages">Signature Beverages</button>
+            </div>
+
             <div class="menu-grid">
-                <div class="menu-card">
+                <!-- Mains -->
+                <div class="menu-card" data-category="mains">
                     <div class="menu-header">
                         <h3>Murgh Makhani (Butter Chicken)</h3>
                         <span class="price">Rs. 450</span>
                     </div>
                     <p class="menu-desc">Tender chicken slow-cooked in a rich, buttery tomato gravy with fenugreek and cream.</p>
                 </div>
-                <div class="menu-card">
+                <div class="menu-card" data-category="mains">
                     <div class="menu-header">
                         <h3>Lamb Rogan Josh</h3>
                         <span class="price">Rs. 550</span>
                     </div>
                     <p class="menu-desc">Kashmiri delicacy of slow-braised lamb shank in an aromatic sauce of fennel, ginger, and saffron.</p>
                 </div>
-                <div class="menu-card">
+                <div class="menu-card" data-category="mains">
                     <div class="menu-header">
                         <h3>Paneer Tikka Masala</h3>
                         <span class="price">Rs. 350</span>
                     </div>
                     <p class="menu-desc">Charcoal-smoked cottage cheese in a spiced onion-tomato reduction with fresh cilantro.</p>
                 </div>
-                <div class="menu-card">
+                <div class="menu-card" data-category="mains">
                     <div class="menu-header">
                         <h3>Malabar Prawn Curry</h3>
                         <span class="price">Rs. 650</span>
                     </div>
                     <p class="menu-desc">Plump jumbo prawns simmered in a coastal coconut broth with tamarind, mustard seeds, and curry leaves.</p>
                 </div>
-                <div class="menu-card">
+                <div class="menu-card" data-category="mains">
                     <div class="menu-header">
                         <h3>Hyderabadi Dum Biryani</h3>
                         <span class="price">Rs. 420</span>
                     </div>
                     <p class="menu-desc">Fragrant basmati rice slow-cooked with marinated meat, saffron, mint, and caramelized onions.</p>
                 </div>
-                <div class="menu-card">
+                <div class="menu-card" data-category="mains">
                     <div class="menu-header">
                         <h3>Tandoori Lamb Chops</h3>
                         <span class="price">Rs. 750</span>
                     </div>
                     <p class="menu-desc">New Zealand lamb chops marinated overnight in strained yogurt and secret royal spices, clay oven-roasted.</p>
                 </div>
-                <div class="menu-card">
+                <div class="menu-card" data-category="mains">
                     <div class="menu-header">
                         <h3>Dal Makhani</h3>
                         <span class="price">Rs. 280</span>
                     </div>
                     <p class="menu-desc">Black lentils and kidney beans simmered overnight on a wood fire, finished with churned butter.</p>
                 </div>
-                <div class="menu-card">
+
+                <!-- Desserts -->
+                <div class="menu-card" data-category="desserts">
                     <div class="menu-header">
                         <h3>Shahi Tukda</h3>
                         <span class="price">Rs. 180</span>
                     </div>
                     <p class="menu-desc">Rich bread pudding with cardamom-infused milk, topped with nuts and edible silver foil.</p>
                 </div>
-                <div class="menu-card">
+                <div class="menu-card" data-category="desserts">
                     <div class="menu-header">
                         <h3>Saffron Srikhand & Jamun</h3>
                         <span class="price">Rs. 220</span>
                     </div>
                     <p class="menu-desc">Warm golden gulab jamun served resting on chilled, saffron-infused strained yogurt.</p>
                 </div>
-                <div class="menu-card">
+                <div class="menu-card" data-category="desserts">
                     <div class="menu-header">
                         <h3>Jalebi with Rabri</h3>
                         <span class="price">Rs. 150</span>
                     </div>
                     <p class="menu-desc">Crisp, golden pretzels soaked in saffron syrup, served with rich condensed milk.</p>
                 </div>
-                <!-- Daily Update Example: Added a new Special Item -->
-                <div class="menu-card special">
+                <div class="menu-card special" data-category="desserts">
                     <div class="menu-header">
                         <h3>Daily Special: Masala Chai Panna Cotta</h3>
                         <span class="price">Rs. 210</span>
                     </div>
                     <p class="menu-desc">A perfect fusion dessert of creamy panna cotta infused with authentic Indian chai spices.</p>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Beverages Section -->
-    <section id="beverages">
-        <div class="container">
-            <h2 class="section-title">Signature Beverages</h2>
-            <div class="menu-grid">
-                <div class="menu-card">
+                <!-- Beverages -->
+                <div class="menu-card" data-category="beverages">
                     <div class="menu-header">
                         <h3>Mango Lassi</h3>
                         <span class="price">Rs. 150</span>
                     </div>
                     <p class="menu-desc">A refreshing blend of sweet mangoes, yogurt, and a touch of cardamom.</p>
                 </div>
-                <div class="menu-card">
+                <div class="menu-card" data-category="beverages">
                     <div class="menu-header">
                         <h3>Masala Chai</h3>
                         <span class="price">Rs. 80</span>
                     </div>
                     <p class="menu-desc">Brewed black tea with a mixture of aromatic Indian spices and herbs.</p>
                 </div>
-                <div class="menu-card">
+                <div class="menu-card" data-category="beverages">
                     <div class="menu-header">
                         <h3>Rose Sherbet</h3>
                         <span class="price">Rs. 120</span>
@@ -194,7 +198,6 @@
                     <p class="menu-desc">A fragrant, sweet drink made from rose petals, served chilled.</p>
                 </div>
             </div>
-
         </div>
     </section>
 
