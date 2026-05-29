@@ -279,6 +279,17 @@
             <div class="reservation-info">
                 <h2>Join Us for an Evening</h2>
                 <p>Secure your exclusive dining experience. Spaces are limited.</p>
+                
+                <!-- My Bookings Card -->
+                <div class="my-bookings-container" id="myBookingsContainer">
+                    <h3>Your Reservations</h3>
+                    <div class="booking-search-bar">
+                        <input type="text" id="bookingSearchInput" placeholder="Search by name..." aria-label="Search your reservations">
+                    </div>
+                    <div class="bookings-list" id="bookingsList" role="region" aria-live="polite">
+                        <p class="no-bookings">No active bookings yet.</p>
+                    </div>
+                </div>
             </div>
             <form id="reservationForm" class="reservation-form">
                 <div class="form-group">

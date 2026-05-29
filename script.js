@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMenuFilters();
     initReviews();
     initReservationForm();
+    initBookingManager();
     initBackToTop();
     initCopyrightYear();
     initScrollSpy();
@@ -89,16 +90,46 @@ function initReservationForm() {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         
+        const nameInput = document.getElementById('name');
+        const dateVal = dateInput ? dateInput.value : '';
+        const guestsSelect = document.getElementById('guests');
+        const guestsVal = guestsSelect ? guestsSelect.value : '2';
+
+        if (!nameInput.value.trim() || !dateVal) return;
+
         const originalText = btn.innerText;
         btn.innerText = 'Processing...';
         btn.style.opacity = '0.8';
         
         setTimeout(() => {
+            // Save Booking to LocalStorage
+            const bookings = JSON.parse(localStorage.getItem('aura_bookings') || '[]');
+            const newBooking = {
+                id: Date.now(),
+                name: nameInput.value.trim(),
+                date: dateVal,
+                guests: guestsVal
+            };
+            bookings.push(newBooking);
+            localStorage.setItem('aura_bookings', JSON.stringify(bookings));
+
+            // Refresh Bookings display if helper exists
+            if (window.refreshBookingsList) {
+                window.refreshBookingsList();
+            }
+
             btn.innerText = 'Reservation Confirmed!';
             btn.style.background = '#28a745';
             btn.style.color = '#fff';
             
             form.reset();
+            if (dateInput) {
+                const today = new Date();
+                const year = today.getFullYear();
+                const month = String(today.getMonth() + 1).padStart(2, '0');
+                const day = String(today.getDate()).padStart(2, '0');
+                dateInput.min = `${year}-${month}-${day}`;
+            }
             
             setTimeout(() => {
                 btn.innerText = originalText;
@@ -371,6 +402,86 @@ if (newsletterForm) {
             btn.style.color = 'var(--bg-color)';
         }, 3000);
     });
+}
+
+/**
+ * Reservations Booking Manager (Local Storage & Simulation)
+ */
+function initBookingManager() {
+    const listContainer = document.getElementById('bookingsList');
+    const searchInput = document.getElementById('bookingSearchInput');
+
+    if (!listContainer) return;
+
+    // Helper to refresh bookings from localStorage
+    window.refreshBookingsList = function(searchTerm = '') {
+        const bookings = JSON.parse(localStorage.getItem('aura_bookings') || '[]');
+        listContainer.innerHTML = '';
+
+        const filtered = bookings.filter(b => 
+            b.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+
+        if (filtered.length === 0) {
+            listContainer.innerHTML = searchTerm 
+                ? '<p class="no-bookings">No matching reservations found.</p>'
+                : '<p class="no-bookings">No active bookings yet.</p>';
+            return;
+        }
+
+        filtered.forEach(booking => {
+            const item = document.createElement('div');
+            item.className = 'booking-item';
+            item.setAttribute('data-id', booking.id);
+            item.innerHTML = `
+                <div class="booking-details">
+                    <span class="booking-name">${escapeHTML(booking.name)}</span>
+                    <span class="booking-meta">${booking.guests} ${parseInt(booking.guests) === 1 ? 'Person' : 'People'} • ${booking.date}</span>
+                </div>
+                <div class="booking-actions">
+                    <span class="booking-badge confirmed">Confirmed</span>
+                    <button class="cancel-booking-btn" data-id="${booking.id}">Cancel</button>
+                </div>
+            `;
+            listContainer.appendChild(item);
+        });
+    };
+
+    // Helper to escape HTML to prevent XSS
+    function escapeHTML(str) {
+        return str.replace(/[&<>'"]/g, 
+            tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+        );
+    }
+
+    // Handle cancellation delegation
+    listContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('cancel-booking-btn')) {
+            const bookingId = parseInt(e.target.getAttribute('data-id'));
+            const bookingItem = e.target.closest('.booking-item');
+
+            if (bookingItem) {
+                bookingItem.classList.add('cancelling');
+                
+                setTimeout(() => {
+                    let bookings = JSON.parse(localStorage.getItem('aura_bookings') || '[]');
+                    bookings = bookings.filter(b => b.id !== bookingId);
+                    localStorage.setItem('aura_bookings', JSON.stringify(bookings));
+                    window.refreshBookingsList(searchInput ? searchInput.value : '');
+                }, 300);
+            }
+        }
+    });
+
+    // Handle Search input
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            window.refreshBookingsList(e.target.value);
+        });
+    }
+
+    // Initial render
+    window.refreshBookingsList();
 }
 
 const observer = new IntersectionObserver((entries) => {
