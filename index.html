@@ -242,6 +242,34 @@
                     <p class="guest-name">— Rohan Mehra</p>
                 </div>
             </div>
+
+            <!-- Share Your Experience Form -->
+            <div class="review-form-container">
+                <h3 class="review-form-title">Share Your Experience</h3>
+                <form id="testimonialForm" class="review-form">
+                    <div class="form-group row">
+                        <div class="col">
+                            <label for="reviewName">Name <span class="required">*</span></label>
+                            <input type="text" id="reviewName" required placeholder="e.g. Vikram Sethi" aria-label="Enter your name">
+                        </div>
+                        <div class="col">
+                            <label>Rating <span class="required">*</span></label>
+                            <div class="star-rating" role="radiogroup" aria-label="Choose rating">
+                                <span class="star" data-value="5" role="radio" aria-checked="false" tabindex="0">★</span>
+                                <span class="star" data-value="4" role="radio" aria-checked="false" tabindex="0">★</span>
+                                <span class="star" data-value="3" role="radio" aria-checked="false" tabindex="0">★</span>
+                                <span class="star" data-value="2" role="radio" aria-checked="false" tabindex="0">★</span>
+                                <span class="star" data-value="1" role="radio" aria-checked="false" tabindex="0">★</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewText">Your Review <span class="required">*</span></label>
+                        <textarea id="reviewText" required rows="3" placeholder="Describe your dining experience at Aura..." aria-label="Enter your review text"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" id="submitReviewBtn">Submit Testimonial</button>
+                </form>
+            </div>
         </div>
     </section>
 

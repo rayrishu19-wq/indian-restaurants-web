@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavbar();
     initMobileMenu();
     initMenuFilters();
+    initReviews();
     initReservationForm();
     initBackToTop();
     initCopyrightYear();
@@ -233,6 +234,122 @@ function initMenuFilters() {
             }
         });
     }
+}
+
+/**
+ * Testimonial Reviews System (Local Storage)
+ */
+function initReviews() {
+    const testimonialForm = document.getElementById('testimonialForm');
+    const testimonialsGrid = document.querySelector('.testimonials-grid');
+    const stars = document.querySelectorAll('.star-rating .star');
+    let selectedRating = 5;
+
+    if (!testimonialForm || !testimonialsGrid) return;
+
+    // Handle Star Clicks
+    stars.forEach(star => {
+        // Mark stars selected by default
+        star.classList.add('selected');
+
+        star.addEventListener('click', () => {
+            selectedRating = parseInt(star.getAttribute('data-value'));
+            stars.forEach(s => {
+                const val = parseInt(s.getAttribute('data-value'));
+                if (val <= selectedRating) {
+                    s.classList.add('selected');
+                } else {
+                    s.classList.remove('selected');
+                }
+            });
+        });
+
+        // Add keyboard support
+        star.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                star.click();
+            }
+        });
+    });
+
+    // Helper to generate stars string
+    const getStarsString = (count) => '★'.repeat(count) + '☆'.repeat(5 - count);
+
+    // Helper to render a testimonial card
+    const renderTestimonial = (name, text, rating, isNew = false) => {
+        const card = document.createElement('div');
+        card.className = 'testimonial-card';
+        card.innerHTML = `
+            <div class="rating">${getStarsString(rating)}</div>
+            <p class="testimonial-text">"${text}"</p>
+            <p class="guest-name">— ${name}</p>
+        `;
+        
+        if (isNew) {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s ease-out';
+            testimonialsGrid.appendChild(card);
+            // Trigger reflow & animate
+            void card.offsetWidth;
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        } else {
+            testimonialsGrid.appendChild(card);
+        }
+    };
+
+    // Load saved reviews
+    const savedReviews = JSON.parse(localStorage.getItem('aura_reviews') || '[]');
+    savedReviews.forEach(rev => {
+        renderTestimonial(rev.name, rev.text, rev.rating);
+    });
+
+    // Handle Form Submission
+    testimonialForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const nameInput = document.getElementById('reviewName');
+        const textInput = document.getElementById('reviewText');
+        const submitBtn = document.getElementById('submitReviewBtn');
+
+        if (!nameInput.value.trim() || !textInput.value.trim()) return;
+
+        const name = nameInput.value.trim();
+        const text = textInput.value.trim();
+        const rating = selectedRating;
+
+        const originalText = submitBtn.innerText;
+        submitBtn.innerText = 'Submitting...';
+        submitBtn.disabled = true;
+
+        setTimeout(() => {
+            // Save to LocalStorage
+            const currentReviews = JSON.parse(localStorage.getItem('aura_reviews') || '[]');
+            currentReviews.push({ name, text, rating });
+            localStorage.setItem('aura_reviews', JSON.stringify(currentReviews));
+
+            // Render testimonial
+            renderTestimonial(name, text, rating, true);
+
+            // Reset form
+            testimonialForm.reset();
+            selectedRating = 5;
+            stars.forEach(s => s.classList.add('selected'));
+
+            submitBtn.innerText = 'Thank You!';
+            submitBtn.style.background = '#28a745';
+            submitBtn.style.color = '#fff';
+
+            setTimeout(() => {
+                submitBtn.innerText = originalText;
+                submitBtn.disabled = false;
+                submitBtn.style.background = 'var(--primary-color)';
+                submitBtn.style.color = 'var(--bg-color)';
+            }, 2000);
+        }, 1000);
+    });
 }
 
 

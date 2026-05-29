@@ -442,6 +442,62 @@ h1, h2, h3, .logo {
     font-size: 1.1rem;
 }
 
+/* Guest Review Form Styles */
+.review-form-container {
+    max-width: 600px;
+    margin: 6rem auto 0;
+    padding: 3rem;
+    background: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.review-form-title {
+    font-family: var(--font-heading);
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 0.2rem;
+    font-size: 1.8rem;
+}
+
+.star {
+    cursor: pointer;
+    color: #444;
+    transition: color 0.2s ease;
+}
+
+.star:hover,
+.star:hover ~ .star,
+.star.selected,
+.star.selected ~ .star {
+    color: var(--primary-color);
+}
+
+textarea {
+    width: 100%;
+    padding: 0.8rem;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border-color);
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    outline: none;
+    resize: vertical;
+    transition: border-color var(--transition-speed);
+}
+
+textarea:focus {
+    border-color: var(--primary-color);
+}
+
 /* Reservation Section */
 #reservation {
     padding: 6rem 0;
