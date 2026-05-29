@@ -44,6 +44,10 @@ git push -u origin main
 ---
 
 ## 🎨 Features
+- **Menu Category Filters:** Interactive tabs to filter signature selections dynamically between Main Course, Exquisite Desserts, and Beverages.
+- **Local Storage Bookings Manager:** Simulated reservation manager that allows users to view, search, and cancel active reservations client-side.
+- **Guest Testimonial Submission Form:** Star rating review submission picker that appends guest experiences directly to the landing page with LocalStorage persistence.
+- **English-Hindi Translation Toggle:** Floating button in the navbar to instantly translate the user interface between English and Hindi.
 - **Responsive Layout:** Works beautifully on mobile, tablet, and desktop screens.
 - **ScrollSpy Highlighting:** Dynamically highlights the current section in the navigation menu as you scroll.
 - **Improved Accessibility (a11y):** Full keyboard support (Enter/Space triggers) and standard ARIA markup (`aria-expanded`, `aria-controls`) for the mobile menu.
@@ -59,7 +63,7 @@ git push -u origin main
 ## 🔮 Future Enhancements
 - **Dynamic Menu:** Fetch menu items from a JSON file or API.
 - **Table Booking System:** Integrate with a backend for real-time table availability.
-- **Multi-language Support:** Add support for Hindi and other languages.
+- **Dark/Light Mode Toggle:** Allow users to choose between light and dark themes.
 
 ## 🏃‍♀️ How to run locally
 No compilation step `npm install` is needed! Just open the `index.html` file in your favorite web browser or right-click `index.html` and use a VS Code extension like "Live Server".
@@ -73,8 +77,9 @@ For the best experience on mobile, ensure you view the site in portrait mode.
 ## 🗺️ Project Roadmap
 - [x] Responsive layout optimization.
 - [x] Smooth scrolling dynamic navigation.
-- [ ] Adding dessert card modules.
-- [ ] Dynamic table booking backend simulation.
+- [x] Adding dessert card modules.
+- [x] Dynamic table booking backend simulation.
+- [x] Multi-language English/Hindi translation support.
 
 
 ## 👥 Authors & Contributors
