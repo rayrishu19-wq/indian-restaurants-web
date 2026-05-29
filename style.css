@@ -130,6 +130,38 @@ h1, h2, h3, .logo {
     transform: translateY(-2px);
 }
 
+.lang-switch-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 1.5rem;
+}
+
+.lang-btn {
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 0.35rem 0.8rem;
+    font-size: 0.85rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all var(--transition-speed) ease;
+}
+
+.lang-btn:hover {
+    background: var(--primary-color);
+    color: var(--bg-color);
+    box-shadow: 0 4px 10px rgba(212, 175, 55, 0.2);
+}
+
+@media (max-width: 768px) {
+    .lang-switch-container {
+        margin-right: 1rem;
+    }
+}
+
 .hamburger {
     display: none;
     cursor: pointer;

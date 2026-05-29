@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initReviews();
     initReservationForm();
     initBookingManager();
+    initLanguageToggle();
     initBackToTop();
     initCopyrightYear();
     initScrollSpy();
@@ -482,6 +483,110 @@ function initBookingManager() {
 
     // Initial render
     window.refreshBookingsList();
+}
+
+/**
+ * Multi-language (English/Hindi) Translation Logic
+ */
+function initLanguageToggle() {
+    const langBtn = document.getElementById('langToggleBtn');
+    if (!langBtn) return;
+
+    const translationMap = {
+        '.logo': 'औरा',
+        '.nav-links a[href="#hero"]': 'होम',
+        '.nav-links a[href="#menu"]': 'मेनू',
+        '.nav-links a[href="#beverages"]': 'पेय',
+        '.nav-links a[href="#reservation"]': 'आरक्षण',
+        '.nav-links .nav-cta': 'ऑनलाइन ऑर्डर',
+        '.announcement-banner': '🎉 विशेष ऑफर: इस सप्ताह बुक किए गए सभी आरक्षणों पर 20% की छूट का आनंद लें!',
+        '.hero-title': 'पाक कला की उत्कृष्टता <br> <span class="highlight">परिष्कृत</span>',
+        '.hero-subtitle': 'स्वाद की एक परिष्कृत यात्रा शुरू करें, जहां हर व्यंजन प्रामाणिक भारतीय विरासत की उत्कृष्ट कृति है।',
+        '.hero-btns a[href="#reservation"]': 'टेबल बुक करें',
+        '.hero-btns a[href="#menu"]': 'मेनू देखें',
+        '#heritage h2.section-title': 'हमारी पाक विरासत',
+        '#heritage p:nth-of-type(1)': '1984 से, औरा प्रामाणिक भारतीय पाक परंपराओं का ध्वजवाहक रहा है। दिल्ली के केंद्र में एक छोटे से पारिवारिक रसोईघर से जो शुरू हुआ था, वह आज भोजन प्रेमियों के लिए एक अभयारण्य बन गया है।',
+        '#heritage p:nth-of-type(2)': 'हमारे मसाले खारी बावली के मसाला बाजारों से हाथ से चुने जाते हैं, और हमारी तकनीकें प्राचीन भारत के शाही रसोइयों से जुड़ी हुई हैं। औरा में, हम सिर्फ भोजन नहीं परोसते; हम थाली में कहानियाँ परोसते हैं।',
+        '.premium-badge': '1984 से',
+        '#menu h2.section-title': 'विशिष्ट व्यंजन',
+        '.filter-btn[data-filter="all"]': 'सभी व्यंजन',
+        '.filter-btn[data-filter="mains"]': 'मुख्य भोजन',
+        '.filter-btn[data-filter="desserts"]': 'स्वादिष्ट डेसर्ट',
+        '.filter-btn[data-filter="beverages"]': 'विशिष्ट पेय',
+        '#testimonials h2.section-title': 'अतिथि अनुभव',
+        '.review-form-title': 'अपना अनुभव साझा करें',
+        'label[for="reviewName"]': 'नाम <span class="required">*</span>',
+        'label[for="reviewText"]': 'आपकी समीक्षा <span class="required">*</span>',
+        '#submitReviewBtn': 'प्रतिक्रिया भेजें',
+        '#reviewName': { placeholder: 'उदा. विक्रम सेठी' },
+        '#reviewText': { placeholder: 'औरा में अपने भोजन के अनुभव का वर्णन करें...' },
+        '.reservation-info h2': 'शाम को हमारे साथ जुड़ें',
+        '.reservation-info p': 'अपने विशेष भोजन अनुभव को सुरक्षित करें। स्थान सीमित हैं।',
+        '#myBookingsContainer h3': 'आपके आरक्षण',
+        '#bookingSearchInput': { placeholder: 'नाम से खोजें...' },
+        '.no-bookings': 'अभी कोई सक्रिय आरक्षण नहीं है।',
+        'label[for="name"]': 'पूरा नाम <span class="required">*</span>',
+        'label[for="date"]': 'तारीख',
+        'label[for="guests"]': 'अतिथि',
+        '#name': { placeholder: 'जॉन डो' },
+        '#submitBtn': 'आरक्षण की पुष्टि करें',
+        '#newsletter h2': 'संपर्क में रहें',
+        '#newsletter p': 'विशेष ऑफर, मौसमी मेनू अपडेट और हमारे विशेष कार्यक्रमों के निमंत्रण प्राप्त करने के लिए सदस्यता लें।',
+        '.newsletter-form input': { placeholder: 'आपका ईमेल पता' },
+        '.newsletter-btn': 'सदस्य बनें',
+        'footer .brand p': 'प्रामाणिक भारतीय विरासत आधुनिक विलासिता से मिलती है। एक अनूठी पाक यात्रा।',
+        'footer .hours h3': 'खुलने का समय',
+        'footer .contact h3': 'हमसे मिलें',
+        'footer .contact p:nth-of-type(1)': '123 क्युलिनरी लेन, एपिक्यूरियन सिटी'
+    };
+
+    function applyTranslation(lang) {
+        if (lang === 'hi') {
+            for (const [selector, translation] of Object.entries(translationMap)) {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(element => {
+                    if (typeof translation === 'object' && translation.placeholder) {
+                        if (!element.hasAttribute('data-en-placeholder')) {
+                            element.setAttribute('data-en-placeholder', element.placeholder || '');
+                        }
+                        element.placeholder = translation.placeholder;
+                    } else {
+                        if (!element.hasAttribute('data-en-html')) {
+                            element.setAttribute('data-en-html', element.innerHTML);
+                        }
+                        element.innerHTML = translation;
+                    }
+                });
+            }
+            langBtn.textContent = 'English';
+            langBtn.setAttribute('aria-label', 'Switch to English');
+            langBtn.setAttribute('data-lang', 'hi');
+        } else {
+            // Restore English
+            document.querySelectorAll('[data-en-html]').forEach(element => {
+                element.innerHTML = element.getAttribute('data-en-html');
+            });
+            document.querySelectorAll('[data-en-placeholder]').forEach(element => {
+                element.placeholder = element.getAttribute('data-en-placeholder');
+            });
+            langBtn.textContent = 'हिन्दी';
+            langBtn.setAttribute('aria-label', 'Switch to Hindi');
+            langBtn.setAttribute('data-lang', 'en');
+        }
+        localStorage.setItem('aura_lang', lang);
+    }
+
+    langBtn.addEventListener('click', () => {
+        const currentLang = langBtn.getAttribute('data-lang');
+        const nextLang = currentLang === 'en' ? 'hi' : 'en';
+        applyTranslation(nextLang);
+    });
+
+    // Check saved language selection on load
+    const savedLang = localStorage.getItem('aura_lang');
+    if (savedLang === 'hi') {
+        applyTranslation('hi');
+    }
 }
 
 const observer = new IntersectionObserver((entries) => {
