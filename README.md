@@ -59,6 +59,7 @@ git push -u origin main
 - **Social Sharing:** Optimized with Open Graph and Twitter meta tags for professional social media links.
 - **Back to Top:** Smooth scrolling back-to-top button for improved navigation.
 - **Enhanced Footer:** Brand-focused footer with social media links and elegant typography.
+- **Dynamic Elements:** Visual fading animation effects on scroll using IntersectionObserver.
 
 ## 🔮 Future Enhancements
 - **Dynamic Menu:** Fetch menu items from a JSON file or API.
