@@ -597,7 +597,7 @@ const observer = new IntersectionObserver((entries) => {
             observer.unobserve(entry.target);
         }
     });
-}, { threshold: 0.1 });
+}, { threshold: 0.15 }); // Trigger when 15% of the element is visible in the viewport
 
 document.querySelectorAll('.menu-card, .testimonial-card').forEach((el) => {
     el.style.opacity = '0';
