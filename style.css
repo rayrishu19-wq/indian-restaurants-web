@@ -13,6 +13,7 @@
     --transition-speed: 0.35s; /* Smooth UI state transition speed */
 }
 
+/* Base reset and generic layout rules */
 * {
     margin: 0;
     padding: 0;
