@@ -42,6 +42,7 @@ function initMobileMenu() {
 
     if (!hamburger || !navLinks) return;
 
+    // Toggle menu state and update hamburger icon classes on click
     const toggleMenu = () => {
         const isActive = hamburger.classList.toggle('active');
         navLinks.classList.toggle('active');
