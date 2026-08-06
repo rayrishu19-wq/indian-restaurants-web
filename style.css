@@ -10,7 +10,7 @@
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Inter', sans-serif;
     
-    --transition-speed: 0.3s;
+    --transition-speed: 0.35s; /* Smooth UI state transition speed */
 }
 
 * {
